@@ -49,7 +49,8 @@ class Tree:
         for el in dirlist:
             el = os.path.join(self.root, el)
             if os.path.isdir(el):
-                self.addDir(el)
+                if os.path.exists(os.path.join(el, 'index.rst')):
+                    self.addDir(el)
             elif os.path.splitext(el)[1] == '.html':
                 self.addFile(el)
     

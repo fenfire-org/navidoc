@@ -44,23 +44,28 @@ dbg_navidoc = config.dbg.shorthand('navidoc')
 
 base_path = ''
 
-def postprocess(path):
+def postprocess(path, set_base_path=1):
     """
     HTML postprocessing function.
     """
     global base_path
+
+    if set_base_path:
+        config.working_directory = os.path.normpath(os.path.dirname(path))
+        base_path = os.path.normpath(path)
     
-    config.working_directory = os.path.normpath(os.path.dirname(path))
-    base_path = config.working_directory
+    dbg("POSTPROCESS %s -> %s" % (path, base_path))
     
     dirlist = []
     if (os.path.isfile(path)): embed_procedural_texture(path)
+    elif not os.path.exists(os.path.join(path, 'index.rst')): return
     else: dirlist = listdir(path, "html", dirs=1)
 
-    for entry in dirlist:        
+    for entry in dirlist:
         if os.path.isdir(slashify(path)+entry) \
                and not os.path.islink(slashify(path)+entry):
-            postprocess(slashify(path)+entry)
+            postprocess(slashify(path)+entry, set_base_path=0)
+
         elif os.path.isfile(slashify(path)+entry):
             embed_procedural_texture(slashify(path)+entry)
 
