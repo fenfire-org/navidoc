@@ -1,0 +1,74 @@
+=================
+Tasks for navidoc
+=================
+
+0.1alpha1: First separate release    
+=================================
+
+unresolved bugs
+  - bigpackage can be linked only, when it's size/location is defined explicitly
+
+continuous:
+  - more descriptive error messages from parser
+  - solution for avoiding metapost errors
+  - unit tests for syntax :)
+  - unit test for routines
+
+0.2alpha1:
+==========
+
+  - syntax to follow Fenfire coding standards; if it is necessary?
+  - add a subtitle into javodoc/docxx output before
+    diagrams from different projects?
+  - NavBar update for gzz.css, to allow using NavBar with
+    design documentation
+  - documenting, tests
+  - fix drawing of naryassoc connections
+  - fix drawing of component
+  - more?
+
+Design Issues
+-------------
+
+  - plugin issues
+    + nested classes in javadoc: grep for MipzipLoader.Level 
+    + Currently diagrams are embedded into html-documents after
+      the first header-tag. This could be enough for javadoc and
+      other, but in reST this should be possible to overdrive by
+      own directive.
+    + unit test plugin
+
+  - directive issues
+    + diagram names should be unique, currently this can't be
+      easily tested, make something for it
+
+UML language
+------------
+
+  - fix umltool graphics to be closer to the UML 3amigos books
+
+Docutils latex writer
+---------------------
+
+  - cleanup
+  - strip all unnecessaries, if there's any
+    + latex output should be as clean and readable as possible
+    + should not have dependecy for unnecessary latex packages
+    + collect comments and experiences of using when
+      writing the article
+    + summarize, what have been changed to the original latex writer
+
+1.0: Feature-complete
+=====================
+
+anybody:
+  - all UML diagrams in UML reference manual
+    and user's guide should be easy to do
+  - standardize on another UML tool; required features:
+    + supports qualifiers, n-ary associations,
+      class and sequence diagrams
+    + supports arbitrary drawing on the diagrams
+    + fast and easy to use and libre
+  - figure out metapost tfm files; we need to have Helvetica.tfm
+    since we want to use the postscript font names to get standalone
+    files. But it would be nice not to have it in every directory ;)

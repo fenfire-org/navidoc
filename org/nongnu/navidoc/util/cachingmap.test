@@ -1,0 +1,43 @@
+# (c) Tuomas J. Lukka
+
+from __future__ import nested_scopes
+
+from org.nongnu.navidoc.util import CachingMap
+from navidoc.util.maptest import *
+
+def setUp():
+    setUp_maptest(CachingMap(50))
+
+def testRemoveReally():
+    """Test that the Removable interface is used right:
+    it should be impossible to get a value from the map 
+    whose wasRemoved() has been called.
+
+    Also, test that the removes are really called.
+    """
+
+    class Entry(CachingMap.Removable):
+	def __init__(self, n):
+	    self.n = n
+	    self.closed = 0
+	def getValue(self):
+	    assert not self.closed
+	    return self.n
+	def wasRemoved(self, key):
+	    self.closed = 1
+
+    map = CachingMap(50)
+
+    entries = [Entry(i) for i in range(0, 100)]
+
+    for i in range(0, 100): 
+	map.put(i, entries[i])
+	for j in range(0, 100):
+	    ent = map.get(j)
+	    if ent != None:
+		assert ent.getValue() == j
+	    else:
+		if j <= i:
+		    assert entries[j].closed
+		
+

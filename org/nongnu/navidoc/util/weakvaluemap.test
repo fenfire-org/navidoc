@@ -1,0 +1,86 @@
+# 
+# Copyright (c) 2003, Tuomas J. Lukka
+# 
+# This file is part of Navidoc.
+# 
+# Navidoc is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# Navidoc is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+# Public License for more details.
+# 
+# You should have received a copy of the GNU General
+# Public License along with Navidoc; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+# 
+# 
+
+from __future__ import nested_scopes
+
+import java
+from org.nongnu import navidoc
+from navidoc.util.maptest import *
+
+def setUp():
+    setUp_maptest(navidoc.util.WeakValueMap())
+
+dbg = 0
+
+class C:
+    def __init__(self, n):
+	self.n = n
+    def __del__(self):
+	if dbg:
+	    print "FINALIZING: ",self.n
+
+def createCS(start):
+    return [ C(i) for i in range(start, start + 1000) ]
+
+def testWeakValueMap():
+
+    m = navidoc.util.WeakValueMap()
+
+    cs = createCS(0)
+
+    for i in range(0,1000): 
+	m.put(" %d"%i, cs[i])
+
+    # assert they are still there
+
+    for i in range(0,10): 
+	assert m.get(" %d"%i) == cs[i]
+
+    # Now, free them and collect garbage
+    # The test MAY fail randomly when this is not effective any more...
+    cs = createCS(100000)
+    java.lang.Thread.sleep(500)
+    java.lang.System.gc()
+    java.lang.Thread.sleep(500)
+    cs2 = createCS(100000)
+    java.lang.Thread.sleep(500)
+    java.lang.System.gc()
+    java.lang.Thread.sleep(500)
+    cs3 = createCS(100000)
+    java.lang.Thread.sleep(500)
+
+    # assert they've been zeroed
+
+    for i in range(0,10): 
+	assert m.get(" %d"%i) == None, (i, m.get(" %d"%i))
+
+    # assert overwriting works now
+    m.put(" 0", "FOO")
+
+    # assert the keys are not there any more
+    keys = m.keySet()
+    assert keys.contains(" 0")
+    for i in range(1,10): 
+	assert not keys.contains(" %d"%i) 
+
+
+

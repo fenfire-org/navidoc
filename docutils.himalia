@@ -1,0 +1,19 @@
+#$Id: docutils.himalia,v 1.6 2003/06/04 13:48:32 humppake Exp $
+
+[options]
+
+# These entries affect all processing:
+input-encoding: iso-8859-1
+output-encoding: iso-8859-1
+source-link: 1
+language-code: en
+datestamp: %c
+generator: 1
+
+# These entries affect HTML output:
+stylesheet-path: gzz.css
+
+# These entries affect LaTeX output:
+documentclass: book
+documentclass-options: 12pt,a4
+use-latex-toc: 1

@@ -1,0 +1,213 @@
+@media screen {
+
+/* Overall */
+body {
+	color: black;
+	background: white; 
+	margin: 0.5em 1em 0.5em 1em;
+	text-align: left; 
+	font-size: medium;
+	font-family: sans-serif;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 { font-family: serif; font-weight: bold; }
+h1, .footer { margin-left: 0 }
+h1 { font-size: 220%; }
+h1.title { font-size: 300%; }
+.footer { font-size: 80%; }
+h2 { font-size: 160%; margin-left: 1em; margin-top: 2.0em; margin-bottom: 0.5em; }
+h3 { font-size: 120%; margin-left: 2em;  margin-top: 0.75em; margin-bottom: 0.5em; }
+h4 { font-size: 110%; margin-left: 3em;  margin-top: 0.5em; margin-bottom: 0.25em; }
+h1, h2, h3, h4 {
+	background: #b0e0e0;
+	border-style: solid;
+	border-color: black;
+	border-width: thin;
+	clear: both;
+}
+h5 { font-size: 100%; margin-bottom: -1em; }
+
+/* Bodytext */
+p { 
+	text-align: left; 
+	font-size: medium;
+	font-family: sans-serif;
+}
+
+a { color: blue; }
+
+ul { font-family: sans-serif; }
+dt { font-weight: bold; }
+dfn { font-weight: bold; }
+code { font-family: monospace; }
+
+.figure { clear: both; padding: 1em; padding-bottom: 0em;
+ 	margin-left: 1.5em; margin-right: 1.5em; text-align: center; }
+.figureimg { text-align: center; }
+.wideimg { margin-left: 0; margin-right: -6%; }
+.abstract { width: 60%; text-align: center; }
+.algorithm { font-family: serif; background: #00E0E0; margin-left: 1cm;}
+
+span.red { color: red; background: white;}
+span.green { color: green; background: white; }
+
+.old { font-size: x-small; color: #a0a0a0; }
+
+ /* Voices */
+.tjl { color: #006000; font-family: serif; font-size: medium; }
+.rtr { color: #a00000; font-family: serif; font-size: medium; }
+.benja { color: #6633FF; font-family: serif; font-size: medium; }
+.jvk { color: #000080; font-family: serif; font-size: medium; }
+.ajk { color: #EE00EE; font-family: serif; font-size: medium; }
+.tuukka { color: #2ea597; font-family: serif; font-size: medium; }
+
+.statement { background: #efa13b; }
+.tjllogo { vertical-align: -50%; }
+
+.csswarn { background: #e0f0f0; border-width: thin; border-style: solid;
+	   border-color: black; padding: 2em; font-size: small;}
+
+/* Pegboard */
+table.pegboard { border: thick solid; width: 100%; }
+table.pegboard th { border-bottom: thick solid; }
+table.pegboard td {
+  border: thin solid;
+  vertical-align: top;
+}
+
+ul.plain { margin: 0 0 0 0; list-style: None; padding: 0 0 0 0; }
+
+.peg-current { background: #ff9900; color: #000000; }
+.peg-incomplete { background: #ffffff; color: #000000; } 
+.peg-accepted { background: #33ff33; color: #000000; }
+.peg-implemented { background: #999999; color: #000000; }
+.peg-rejected {}
+.peg-revising {}
+.peg-irrelevant { background: #666666; color: #000000; }
+
+.peg_status_field { font-size: smaller }
+
+/* Some parts of docutils 0.2 stylesheet.
+ */
+
+a.footnote-reference {
+  font-size: smaller ;
+  vertical-align: super }
+
+dd {
+  margin-bottom: 0.5em }
+
+div.attention, div.caution, div.danger, div.error, div.hint,
+div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.hint p.admonition-title, div.important p.admonition-title,
+div.note p.admonition-title, div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+
+div.footer, div.header {
+  font-size: smaller }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  font-family: monospace }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.field-argument {
+  font-style: italic }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option-argument {
+  font-style: italic }
+
+span.problematic {
+  color: red }
+
+span.pre {
+   font-family: monospace }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.footnote {
+  border-left: solid thin black ;
+  padding-left: 0.5ex }
+
+.docinfo-name {
+  font-weight: bold;
+  text-align: left;
+  margin-right: .75em }
+
+td.field-name {
+  font-weight: bold }
+
+}
+
+@media print {
+
+body { font-size: medium; }
+/* h1 { font-size: 130%; } */
+
+}

@@ -1,0 +1,43 @@
+From majukati@cc.jyu.fi Mon Apr 07 10:33:34 2003
+Return-path: <majukati@cc.jyu.fi>
+Envelope-to: commitbot@gzz.info
+Delivery-date: Mon, 07 Apr 2003 10:33:34 +0300
+Received: from subversions.gnu.org ([199.232.41.2])
+	by himalia.it.jyu.fi with esmtp (Exim 3.35 #1 (Debian))
+	id 192R8H-00057v-00
+	for <commitbot@gzz.info>; Mon, 07 Apr 2003 10:33:33 +0300
+Received: from mudyc by subversions.gnu.org with local (Exim 3.35 #1 (Debian))
+	id 192R8N-0001ZU-00; Mon, 07 Apr 2003 03:33:39 -0400
+To: commitbot@gzz.info, gzz-commits@mail.freesoftware.fsf.org
+Subject: fenfire Makefile
+Reply-to: majukati@cc.jyu.fi
+Message-Id: <E192R8N-0001ZU-00@subversions.gnu.org>
+From: Matti Katila <majukati@cc.jyu.fi>
+Date: Mon, 07 Apr 2003 03:33:39 -0400
+
+CVSROOT:	/cvsroot/fenfire
+Module name:	fenfire
+Changes by:	Matti Katila <majukati@cc.jyu.fi>	03/04/07 03:33:39
+
+Modified files:
+	.              : Makefile 
+
+Log message:
+	noone should expand this makefile anymore
+
+CVSWeb URLs:
+http://savannah.gnu.org/cgi-bin/viewcvs/fenfire/fenfire/Makefile.diff?tr1=1.2&tr2=1.3&r1=text&r2=text
+
+Patches:
+Index: fenfire/Makefile
+diff -u fenfire/Makefile:1.2 fenfire/Makefile:1.3
+--- fenfire/Makefile:1.2	Sun Apr  6 10:06:41 2003
++++ fenfire/Makefile	Mon Apr  7 03:33:39 2003
+@@ -1,3 +1,6 @@
++# This is a Makefile for documentation script.
++# For a real makefile use build.xml instead of this.
++
+ all:
+ 	ant 2>&1 | sed 's/ *\[javac\] *//g'
+ 
+

@@ -1,0 +1,157 @@
+==============================================
+Navidoc - linking documentations via imagemaps
+==============================================
+
+Navidoc is a software engineering documentation tool, which turns
+lexically defined UML diagrams embedded in reST into
+multidirectionally hyperlinked menus connecting the design and
+embedded source code documentation.
+
+Please send comments about this software to::
+
+    gzz-dev@nongnu.org
+
+If you would like to subscribe to that mailing list, 
+please go to 
+  
+    http://mail.nongnu.org/mailman/listinfo/gzz-dev/
+
+Navidoc is a part of Fenfire project.
+
+License
+=======
+
+Navidoc Loom is released under the GNU General
+Public License (LGPL). For details, see file ``LICENSE``.
+
+Dependencies
+============
+
+Dependencies not provided in ``navidoc-depends``:
+
++---------------+----------------+
+| Software name | Corresponding  |
+|               | Debian package |
++===============+================+
+| Netpbm        | netpbm         |
++---------------+----------------+
+| Metapost      | tetex-bin      |
++---------------+----------------+
+
+Current development snapshot of Docutils in ``navidoc-depends``
+is fetched 2003-04-10. The snapshot has been patched to work
+better with Jython.
+
+Getting the bleeding-edge version from CVS
+------------------------------------------
+
+You will need to check out both the ``navidoc`` 
+and the ``navidoc-depends`` CVS module
+from the same directory::
+
+  cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/navidoc login
+  cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/navidoc co navidoc
+  cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/navidoc co navidoc-depends
+
+To update your checked out copy, run the following command both in
+your ``navidoc/`` and ``navidoc-depends/`` directories::
+
+  cvs up -dP
+
+Setting up
+==========
+
+All settings and directories are stored in ``navidoc.conf``. Wrong
+paths cause at least diagrams not to compile.
+
+
+Available targets
+=================
+
+html            
+	converts given $RST into html
+
+latex           
+	 converts given $RST into latex
+
+html-loop       
+	loops converting given $RST into html
+
+latex-loop      
+	loops converting given $RST into latex
+
+naviloop        
+	
+	loops converting given $RST into html, creating 
+
+imagemap
+	for diagrams and embedding diagrams into their
+	elements' target files
+
+peg
+	asks a few questions and creates directory, .cvsignore
+        and a template for a new peg
+                                                                                
+The following targets are for project's whole documentation:
+                                                                                
+navidoc
+	compiles reST under project/doc(s)/
+
+navilink
+	imagemaps diagrams under project/doc(s)/
+
+Homepage and mailing lists
+==========================
+
+Navidoc project homepages could be found at
+
+   http://www.nongnu.org/navidoc/
+
+   http://savannah.nongnu.org/projects/navidoc/
+
+Navidoc is currently developed as part of the Fenfire project at
+
+   http://fenfire.org/
+ 
+   http://savannah.nongnu.org/projects/fenfire/
+
+The mailing list is [gzz-dev]:
+
+   http://mail.nongnu.org/mailman/listinfo/gzz-dev/
+
+and CVS commit messages are sent to [gzz-commits]:
+
+   http://mail.nongnu.org/mailman/listinfo/gzz-commits/
+
+This is because Fenfire evolved out of an earlier project
+called Gzz and we haven't fully made the move yet.
+
+Please send bug reports as well as any comments
+to [gzz-dev].
+
+Problem Solving
+===============
+
+- Diagrams are compiled without text (and usually only connections are
+  shown).
+
+  Fonts (tfm) under navidoc/mp/ should be copied
+  also to diagrams' temporary directory.
+
+- Diagrams won't comple and no ``digramname.mp.log`` -files are
+  generated into diagrams' temporary directory.
+ 
+  All MetaPost versions won't create log files and 
+  Navidoc won't work with them.
+
+  Our MetaPost version is::
+
+    MetaPost (Web2C 7.4.5) 0.641
+    kpathsea version 3.4.5
+
+- Got a lot of strange MetaPost errors.
+
+  Check for possible typos in diagram elements' variable names.
+  That seems to be the most usual reason.
+
+  Check the syntax of UML directives' MetaPost part.

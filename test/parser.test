@@ -1,0 +1,58 @@
+# This file is part of Navidoc.
+# 
+# Navidoc is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# Navidoc is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+# Public License for more details.
+# 
+# You should have received a copy of the GNU General
+# Public License along with Navidoc; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+#  
+
+# $Id: parser.test,v 1.2 2003/06/30 14:01:20 humppake Exp $
+
+#
+# Written by Asko Soukka
+#
+
+def test_tabs_to_spaces():
+    from navidoc.util.parser import tabs_to_spaces
+    assert tabs_to_spaces("\t") == '        ', tabs_to_spaces("\t")
+    assert tabs_to_spaces("\t\t") == '                ', tabs_to_spaces("\t\t")
+
+def test_parse_indented():
+    from navidoc.util.parser import parse_indented
+    assert parse_indented('a') == [[['a']]], parse_indented('a')
+    assert parse_indented('a\nb') == [[['a']], [['b']]], parse_indented('a\nb')
+    assert parse_indented('a\nb\n c') == [[['a']], [['b'], [['c']]]], parse_indented('a\nb\n c')
+    assert parse_indented('a\nb\n c d') == [[['a']], [['b'], [['c', 'd']]]], parse_indented('a\nb\n c d')
+    assert parse_indented('a\nb\n c d\ne') == [[['a']], [['b'], [['c', 'd']]], [['e']]], parse_indented('a\nb\n c d\ne')
+    assert parse_indented('a\nb\n c d\ne', tokenize=0) == [['a'], ['b', ['c d']], ['e']], parse_indented('a\nb\n c d\ne', tokenize=0)
+
+def test_random_var():
+    """Test that variables seem to be random."""
+    from navidoc.util.parser import random_var
+    vars = []
+    for n in range(100):
+	tmp = random_var()
+	vars.extend([tmp])
+	assert vars.count(tmp) == 1, vars.count(tmp)
+
+def test_init_spaces():
+    from navidoc.util.parser import init_spaces
+    assert init_spaces(' foo')[0] == 1, init_spaces(' foo')
+    assert init_spaces(' foo')[1] == 'foo', init_spaces(' foo')
+    assert init_spaces(' foo', tokenize=1)[1] == ['foo'], init_spaces(' foo', tokenize=1)
+    assert init_spaces(' fo o', tokenize=1)[1] == ['fo', 'o'], init_spaces(' foo', tokenize=1)
+
+def test_match_remove():
+    from navidoc.util.parser import match_remove
+    assert match_remove('a', 'aaa')[1] == '', match_remove('a', 'aaa')
+    assert match_remove('[b]', 'babab')[1] == 'aa', match_remove('[b]', 'babab')

@@ -1,0 +1,123 @@
+# 
+# Copyright (c) 2003 by Asko Soukka
+# 
+# This file is part of Navidoc.
+# 
+# Navidoc is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# Navidoc is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+# Public License for more details.
+# 
+# You should have received a copy of the GNU General
+# Public License along with Navidoc; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+# 
+
+# $Id: config.himalia,v 1.21 2003/07/21 14:09:58 humppake Exp $
+
+#
+# Written by Asko Soukka
+#
+
+__docformat__ = 'reStructuredText'
+
+"""
+Navidoc configuration module.
+"""
+
+dbg = None
+
+import os, ConfigParser
+
+import navidoc.util.debug
+
+# General debug filter
+dbg = navidoc.util.debug.DebugFilter()
+
+# System calls
+metapost = 'mpost'
+pnmscale = 'pnmscale'
+pstopnm = 'pstopnm'
+pnmtopng = 'pnmtopng'
+stderr = '/dev/null'
+
+# Initializing dynamic settings
+# These should be kept up-to-date in code
+# always when compiling reST or diagrams
+working_directory = '.'
+input_filename = ''
+output_filename = ''
+link_base_directory = None # if different than working_directory
+
+# Set the default docutils.conf
+docutils_conf = './docutils.conf'
+
+# Set the default navidoc.conf
+navidoc_conf = './navidoc.conf'
+read_navidoc_conf = ''
+
+# Holder of packagenames when linking diagrams
+# will be cleaned after every diagram
+linkpackages = {}
+
+# Should linked parts of the diagram be emphasized
+# using colors and rough edge
+link_emphasize = 0
+
+# Should diagrams be generated at all
+# this is altered to halt image generation
+# temporarily
+mp_generate = 1
+
+# Generate only eps -versions of diagrams
+# Usable, when compiling reSTs into LaTeX
+mp_eps_only = 0
+
+# Should context menu be added into diagrams
+# this is modifiable later as UML direvtive option
+mp_context_menu = 0
+
+def read_config(module, filepath):
+    """
+    read_config(module, filepath)
+    
+    Reads a config file and updates
+    attributes in module.
+    """
+    cp = ConfigParser.ConfigParser()
+    cp.read(filepath)
+    for section in cp.sections():
+        for option in cp.options(section):
+            setattr(module, option, eval(cp.get(section, option)))
+
+def imgmapanchor(self, scale=1.0, diagram='', context=''):
+    from navidoc.util.path import slashify, relative_path
+    # Adding javascript thingy, when target not defined
+    if context.endswith('_implicit'):
+        id_postfix = ''
+        context = context[:len(context)-len('_implicit')]
+    else:
+        id_postfix = '_implicit'
+        context = context + '_implicit'
+            
+    if self.target == '' and diagram and context:
+        self.target = "javascript:setImg('"+diagram+"_img', '"+slashify(relative_path(working_directory, mp_directory))+diagram+context+midfix+".png', '#"+diagram+id_postfix+"_map')"
+
+    if not self.target.startswith('javascript'):
+        diagram = '#'+diagram
+        self.target = self.target.replace('.html', '.uml.html')
+    else: diagram = ''
+
+    return """<area href="%s%s" shape="rect" coords="%s" target="%s" title="%s" alt="%s" />""" \
+           % (self.target, diagram,
+              ",".join(["%s"%(int(c*scale)) for c in self.corners]), '_top',
+              self.title, self.title)
+
+import navidoc.mp
+navidoc.mp.MPLink.imgmapanchor = imgmapanchor

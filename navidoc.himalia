@@ -1,0 +1,55 @@
+# 
+# Copyright (c) 2003 by Asko Soukka
+# 
+# This file is part of Navidoc.
+# 
+# Navidoc is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# Navidoc is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+# Public License for more details.
+# 
+# You should have received a copy of the GNU General
+# Public License along with Navidoc; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+# 
+
+# $Id: navidoc.himalia,v 1.1 2003/06/04 13:46:19 humppake Exp $
+
+[link]
+# settings for linking diagrams to generated documentation
+# the search order is ascending with sudden death
+javadoc_directories = ['../ffdoc/libvob/javadoc',
+                       '../ffdoc/storm/javadoc',
+                       '../ffdoc/alph/javadoc',
+                       '../ffdoc/fenfire/javadoc',
+                       '../ffdoc/loom/javadoc',
+                       '../ffdoc/navidoc/javadoc'
+                       ]
+docxx_directories = ['../ffdoc/libvob/docxx',
+                     '../ffdoc/storm/docxx',
+                     '../ffdoc/alph/docxx',
+                     '../ffdoc/fenfire/docxx',
+                     '../ffdoc/loom/docxx',
+                     '../ffdoc/navidoc/docxx',
+                     ]
+# enables crosslinkin between different projects
+# e.g. link foo
+#           bar.gen.html
+# links to bar.gen.html in project foo
+link_redirection = {'navidoc': '../ffdoc/navidoc',
+                    'libvob': '../ffdoc/libvob',
+                    'storm': '../ffdoc/storm',
+                    'alph': '../ffdoc/alph',
+                    'fenfire': '../ffdoc/fenfire',
+                    'loom': '../ffdoc/loom',
+                    }
+
+[directives]
+# settings for MetaPost directives
+mp_directory = '../ffdoc/diagrams' # path to temporary diagram directory, relative to execution directory
