@@ -31,7 +31,7 @@ import config
 
 import re
 
-import navidoc
+import navidoc.mp.uml
 
 dbg = config.dbg.shorthand('uml')
 

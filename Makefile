@@ -3,8 +3,6 @@
 all: java
 
 clean:
-	@echo "Removing everything found in .cvsignores"
-	find . -name ".cvsignore"|while read ign; do (cd `dirname $$ign` && cat .cvsignore|while read files; do rm -Rf $$files; done); done
 	find . -name "*.pyc" | xargs rm -f
 	find . -name "*.class" | xargs rm -f
 	rm -rf CLASSES
@@ -89,19 +87,19 @@ naviloop: # Compiles, links, loops
 	make html-loop DBG="--imagemap $(DBG)" RST="$(RST)"
 
 new-peg: # Creates a new PEG
-	$(JYTHON) newpeg.py $(PEGDIR)
+	$(PYTHON) newpeg.py $(PEGDIR)
 
 html: # Compiles reST into HTML, directories are processed recursively
-	$(JYTHON) rst2any.py --html -d navidoc -d docutils -d pegboard -d mp.fail $(DBG) $(RST)
+	$(PYTHON) rst2any.py --html -d navidoc -d docutils -d pegboard -d mp.fail $(DBG) $(RST)
 
 html-loop: # Loop version for quick recompiling
-	$(JYTHON) rst2any.py --loop --html -d navidoc -d docutils -d pegboard -d mp.fail $(DBG) $(RST)
+	$(PYTHON) rst2any.py --loop --html -d navidoc -d docutils -d pegboard -d mp.fail $(DBG) $(RST)
 
 imagemap: # Bi-directional linking using imagemaps
-	$(JYTHON) rst2any.py --imagemap -d navidoc -d mp.fail $(DBG) $(HTML)
+	$(PYTHON) rst2any.py --imagemap -d navidoc -d mp.fail $(DBG) $(HTML)
 
 latex: # Compiles reST into LaTeX, directories are processed recursively
-	$(JYTHON) rst2any.py --latex -d navidoc -d docutils $(DBG) $(RST)
+	$(PYTHON) rst2any.py --latex -d navidoc -d docutils $(DBG) $(RST)
 
 latex-loop: # Loop version for quick recompiling
-	$(JYTHON) rst2any.py --loop --latex -d navidoc -d docutils $(DBG) $(RST)
+	$(PYTHON) rst2any.py --loop --latex -d navidoc -d docutils $(DBG) $(RST)

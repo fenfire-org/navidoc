@@ -45,7 +45,7 @@ metapost = 'mpost'
 pnmscale = 'pnmscale'
 pstopnm = 'pstopnm'
 pnmtopng = 'pnmtopng'
-stderr = '/dev/null'
+stderr = '/tmp/navidoc.out' #'/dev/null'
 
 # Initializing dynamic settings
 # These should be kept up-to-date in code
